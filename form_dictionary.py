@@ -2,7 +2,7 @@ import json
 from load_articles import read_articles
 
 dictionary = {}
-networds = 0
+net_words = 0
 
 
 # think about how keywords are set to values
@@ -10,23 +10,20 @@ networds = 0
 
 
 def insert_dictionary(str):
-    global networds
+    global net_words
     words = str.split()
     for word in words:
+        net_words += 1
         if word in dictionary:
             dictionary[word] += 1
-            networds += 1
         else:
             dictionary[word] = 1
-            networds += 1
 
 
 def get_ratios(dictionary_1):
     for key in dictionary_1.keys():
-        dictionary_1[key] = dictionary_1[key] / networds
-
+        dictionary_1[key] = dictionary_1[key] / net_words
     return dictionary_1
-
 
 
 def write_dictionary():
@@ -48,6 +45,8 @@ if __name__ == '__main__':
     for article in articles:
         insert_dictionary(article["title"])
         insert_dictionary(article["description"])
+
+    # convert to ratios...
+    dictionary = get_ratios(dictionary)
     write_dictionary()
     print(len(dictionary))
-    print(get_ratios(dictionary))
