@@ -1,4 +1,5 @@
 #think about how keywords are set to values
+#format {'potato': 4, 'oil': 1}
 def word_count(str):
     counts = dict()
     words = str.split()
@@ -11,4 +12,5 @@ def word_count(str):
 
     return counts
 
-print(word_count('poop poop poop shit crap'))
+
+print(word_count("potato potato potato potato oil"))
