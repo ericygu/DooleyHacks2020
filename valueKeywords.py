@@ -17,6 +17,18 @@ def insert_dictionary(str):
 
     return counts
 
+
 insert_dictionary("potato potato potato potato oil")
 print(dictionary)
 
+print(word_count("potato potato potato potato oil"))
+
+
+def write_dictionary():
+    with open('dictionary.json', 'w') as fp:
+        json.dump(dictionary, fp)
+
+
+def read_dictionary():
+    with open('dictionary.json') as f:
+        return json.load(f)
