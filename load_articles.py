@@ -49,8 +49,8 @@ def write_articles(articles):
         json.dump(articles, fp)
 
 
-def read_articles(filename):
-    with open(filename) as f:
+def read_articles():
+    with open('articles.json') as f:
         return json.load(f)
 
 
