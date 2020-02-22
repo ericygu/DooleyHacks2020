@@ -7,8 +7,6 @@ net_words = 0
 
 # think about how keywords are set to values
 # format {'potato': 4, 'oil': 1}
-
-
 def insert_dictionary(str):
     global net_words
     words = str.split()
