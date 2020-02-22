@@ -5,17 +5,18 @@ dictionary = {}
 # format {'potato': 4, 'oil': 1}
 
 
-def word_count(str):
+def insert_dictionary(str):
     counts = dict()
     words = str.split()
 
     for word in words:
         if word in counts:
-            counts[word] += 1
+            dictionary[word] += 1
         else:
-            counts[word] = 1
+            dictionary[word] = 1
 
     return counts
 
+insert_dictionary("potato potato potato potato oil")
+print(dictionary)
 
-print(word_count("potato potato potato potato oil"))
