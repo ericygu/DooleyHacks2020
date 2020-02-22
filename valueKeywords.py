@@ -1,5 +1,10 @@
-#think about how keywords are set to values
-#format {'potato': 4, 'oil': 1}
+dictionary = {}
+
+
+# think about how keywords are set to values
+# format {'potato': 4, 'oil': 1}
+
+
 def word_count(str):
     counts = dict()
     words = str.split()
