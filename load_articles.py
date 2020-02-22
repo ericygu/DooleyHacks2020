@@ -1,4 +1,3 @@
-from newsapi import NewsApiClient
 import json
 import re
 
@@ -6,6 +5,7 @@ API_KEY = '66c2e12a4d234e33b3df8d3057ea4a5a'
 
 
 def get_articles():
+    from newsapi import NewsApiClient
     newsapi = NewsApiClient(api_key=API_KEY)
 
     def get_page(n, source='bbc-news'):
