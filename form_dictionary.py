@@ -1,4 +1,5 @@
 import json
+from load_articles import read_articles
 
 dictionary = {}
 
@@ -8,14 +9,10 @@ dictionary = {}
 def insert_dictionary(str):
     words = str.split()
     for word in words:
-        if word in counts:
+        if word in dictionary:
             dictionary[word] += 1
         else:
             dictionary[word] = 1
-
-
-insert_dictionary("potato potato potato potato oil")
-print(dictionary)
 
 
 def write_dictionary():
@@ -29,4 +26,9 @@ def read_dictionary():
 
 
 if __name__ == '__main__':
-    pass
+    articles = read_articles()
+    for article in articles:
+        insert_dictionary(article["title"])
+        insert_dictionary(article["description"])
+    write_dictionary()
+    print(len(dictionary))
