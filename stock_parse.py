@@ -66,7 +66,7 @@ def updateJSON_prices(sym):
 #            print(dailyDat)
         result = getTSDataDailyForceSuccessFuture(dailyDat, t, 1000)
         if not result:
-            article["delta"] = float("NaN")
+            article["delta"] = float(0)
         else:
             article["delta"] = result[1]["close"] - result[1]["open"]
             if t.date() == result[0].date():
