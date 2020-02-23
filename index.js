@@ -1,16 +1,12 @@
-
-var app = new Vue({
-    el: '#app',
-    data: {
-        rating: 0,
-        text: ''
-    },
-    methods: {
-        evaluate: () => {
-            alert(this);
-        }
-    }
-})
+document.getElementById("form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const text = formData.get('text');
+    console.log(text);
+    const score = getScore(text);
+    console.log(score);
+    document.getElementById("output").innerHTML = score;
+});
 
 
 function loadValuation(callback) {
@@ -26,26 +22,23 @@ function loadValuation(callback) {
     xobj.send(null);
 }
 
-var valuation = null;
+var valuation = {};
 
 loadValuation((res) => {
-    console.log(res);
-    valuation = res
+    valuation = JSON.parse(res);
 });
 
-function getScore(event) {
-    event.preventDefault();
+function getScore(inText) {
     var punctuationRegEx = /[!-/:-@[-`{-~¡-©«-¬®-±´¶-¸»¿×÷˂-˅˒-˟˥-˫˭˯-˿͵;΄-΅·϶҂՚-՟։-֊־׀׃׆׳-״؆-؏؛؞-؟٪-٭۔۩۽-۾܀-܍߶-߹।-॥॰৲-৳৺૱୰௳-௺౿ೱ-ೲ൹෴฿๏๚-๛༁-༗༚-༟༴༶༸༺-༽྅྾-࿅࿇-࿌࿎-࿔၊-၏႞-႟჻፠-፨᎐-᎙᙭-᙮᚛-᚜᛫-᛭᜵-᜶។-៖៘-៛᠀-᠊᥀᥄-᥅᧞-᧿᨞-᨟᭚-᭪᭴-᭼᰻-᰿᱾-᱿᾽᾿-῁῍-῏῝-῟῭-`´-῾\u2000-\u206e⁺-⁾₊-₎₠-₵℀-℁℃-℆℈-℉℔№-℘℞-℣℥℧℩℮℺-℻⅀-⅄⅊-⅍⅏←-⏧␀-␦⑀-⑊⒜-ⓩ─-⚝⚠-⚼⛀-⛃✁-✄✆-✉✌-✧✩-❋❍❏-❒❖❘-❞❡-❵➔➘-➯➱-➾⟀-⟊⟌⟐-⭌⭐-⭔⳥-⳪⳹-⳼⳾-⳿⸀-\u2e7e⺀-⺙⺛-⻳⼀-⿕⿰-⿻\u3000-〿゛-゜゠・㆐-㆑㆖-㆟㇀-㇣㈀-㈞㈪-㉃㉐㉠-㉿㊊-㊰㋀-㋾㌀-㏿䷀-䷿꒐-꓆꘍-꘏꙳꙾꜀-꜖꜠-꜡꞉-꞊꠨-꠫꡴-꡷꣎-꣏꤮-꤯꥟꩜-꩟﬩﴾-﴿﷼-﷽︐-︙︰-﹒﹔-﹦﹨-﹫！-／：-＠［-｀｛-･￠-￦￨-￮￼-�]|\ud800[\udd00-\udd02\udd37-\udd3f\udd79-\udd89\udd90-\udd9b\uddd0-\uddfc\udf9f\udfd0]|\ud802[\udd1f\udd3f\ude50-\ude58]|\ud809[\udc00-\udc7e]|\ud834[\udc00-\udcf5\udd00-\udd26\udd29-\udd64\udd6a-\udd6c\udd83-\udd84\udd8c-\udda9\uddae-\udddd\ude00-\ude41\ude45\udf00-\udf56]|\ud835[\udec1\udedb\udefb\udf15\udf35\udf4f\udf6f\udf89\udfa9\udfc3]|\ud83c[\udc00-\udc2b\udc30-\udc93]/g;
-    var inText = document.getElementById("user_input").value;
     var tokens = inText.toLowerCase().replace(punctuationRegEx, '').replace(/(\s){2,}/g, '$1').split(' ');
     var score = 0;
 
-    for (var i = 0; i < tokens.length; i++) {
-        if (valuation[tokens[i]]) {
-            score += (1 / tokens.length) * valuation[tokens[i]];
+    tokens.map(token => {
+        if (valuation[token]) {
+            score += (1 / tokens.length) * valuation[token]
+        } else {
+            console.log('NO SCORE!')
         }
-    }
-
-    document.getElementById("result").value = score;
-    return;
+    });
+    return score;
 }

@@ -10,17 +10,18 @@
 
 <body>
 	<div id="app">
-		<form v-on:submit.prevent="evaluate">
-			<textarea v-model="text"></textarea>
+		<form id="form">
+			<textarea name="text"></textarea>
 			<button>Evaluate</button>
 		</form>
-		<p>Valuation: {{rating}}</p>
+		<p>Valuation: </p>
+		<p id="output"></p>
 	</div>
 </body>
 <!-- production version, optimized for size and speed -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
 <!-- development version, includes helpful console warnings -->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
 
 <script src="./index.js"></script>
 
